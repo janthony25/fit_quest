@@ -10,7 +10,7 @@ import WelcomeScreen from './screens/WelcomeScreen';
 import CharacterCreationScreen from './screens/CharacterCreationScreen';
 import CharacterNameScreen from './screens/CharacterNameScreen';
 import MainScreen from './screens/MainScreen';
-import QuestScreen from './screens/QuestScreen';
+import BattleScreen from './screens/BattleScreen';
 import StoreScreen from './screens/StoreScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import InventoryScreen from './screens/InventoryScreen';
@@ -25,7 +25,7 @@ export type RootStackParamList = {
 
 export type TabParamList = {
   Character: undefined;
-  Quest: undefined;
+  Battle: undefined;
   Store: undefined;
   Settings: undefined;
 };
@@ -36,7 +36,7 @@ const Tab = createBottomTabNavigator<TabParamList>();
 function TabIcon({ label, focused }: { label: string; focused: boolean }) {
   const icons: Record<string, string> = {
     Character: '⚔️',
-    Quest: '📜',
+    Battle: '📜',
     Store: '🏪',
     Settings: '⚙️',
   };
@@ -75,7 +75,7 @@ function MainTabs() {
       })}
     >
       <Tab.Screen name="Character" component={MainScreen} />
-      <Tab.Screen name="Quest" component={QuestScreen} />
+      <Tab.Screen name="Battle" component={BattleScreen} />
       <Tab.Screen name="Store" component={StoreScreen} />
       <Tab.Screen name="Settings" component={SettingsScreen} />
     </Tab.Navigator>
