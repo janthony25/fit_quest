@@ -204,10 +204,10 @@ const styles = StyleSheet.create({
   },
   knightWeaponOverlay: {
     position: 'absolute',
-    width: 105,
-    height: 105,
-    left: 2,
-    top: 62,
+    width: 110,
+    height: 110,
+    left: -1,
+    top: 61,
   },
   // Shield positioned at knight's left hand (viewer's right side, mid-lower)
   knightShieldOverlay: {
