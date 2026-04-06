@@ -28,8 +28,9 @@ const WEAPON_IMAGES: Record<string, any> = {
 };
 
 const ITEM_IMAGES: Record<string, any> = {
-  novice_sword:  require('../assets/Knight/novice_sword.png'),
-  novice_shield: require('../assets/Knight/novice_shield.png'),
+  novice_sword:  require('../assets/Knight/Sword/novice_sword.png'),
+  novice_shield: require('../assets/Knight/Shield/novice_shield.png'),
+  novice_armor:  require('../assets/Knight/Armor/novice_armor.png'),
 };
 
 const CLASS_IMAGES: Record<string, any> = {
@@ -63,9 +64,9 @@ export default function MainScreen() {
     const { data } = await supabase
       .from('equipment')
       .select(`
-        helm_item_id, armor_item_id, shield_item_id,
         weapon:weapon_item_id(id, image_key),
-        shield:shield_item_id(id, image_key)
+        shield:shield_item_id(id, image_key),
+        armor:armor_item_id(id, image_key)
       `)
       .eq('character_id', character.id)
       .single();
@@ -77,7 +78,8 @@ export default function MainScreen() {
   if (!character) return null;
 
   const expNeeded = getExpToNext(character.level);
-  const image = CLASS_IMAGES[character.class];
+  const armorImageKey = (equipment as any)?.armor?.image_key;
+  const image = armorImageKey ? ITEM_IMAGES[armorImageKey] : CLASS_IMAGES[character.class];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -95,7 +97,7 @@ export default function MainScreen() {
                 {(equipment as any)?.weapon?.image_key && (
                   <Image
                     source={ITEM_IMAGES[(equipment as any).weapon.image_key]}
-                    style={styles.weaponOverlay}
+                    style={styles.knightWeaponOverlay}
                     resizeMode="contain"
                   />
                 )}
@@ -104,7 +106,7 @@ export default function MainScreen() {
                 {(equipment as any)?.shield?.image_key && (
                   <Image
                     source={ITEM_IMAGES[(equipment as any).shield.image_key]}
-                    style={styles.shieldOverlay}
+                    style={styles.knightShieldOverlay}
                     resizeMode="contain"
                   />
                 )}
@@ -200,20 +202,20 @@ const styles = StyleSheet.create({
     width: 150,
     height: 190,
   },
-  weaponOverlay: {
+  knightWeaponOverlay: {
     position: 'absolute',
-    width: 90,
-    height: 90,
-    left: 6,
-    top: 70,
+    width: 105,
+    height: 105,
+    left: 2,
+    top: 62,
   },
   // Shield positioned at knight's left hand (viewer's right side, mid-lower)
-  shieldOverlay: {
+  knightShieldOverlay: {
     position: 'absolute',
-    width: 44,
-    height: 44,
-    right: 4,
-    bottom: 46,
+    width: 64,
+    height: 64,
+    right: 14,
+    bottom: 66,
   },
   portraitPlaceholder: {
     fontSize: 48,

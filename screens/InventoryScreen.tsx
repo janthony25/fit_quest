@@ -42,8 +42,9 @@ const SLOT_COLUMN: Record<Slot, keyof Equipment> = {
 };
 
 const ITEM_IMAGES: Record<string, any> = {
-  novice_sword:  require('../assets/Knight/novice_sword.png'),
-  novice_shield: require('../assets/Knight/novice_shield.png'),
+  novice_sword:  require('../assets/Knight/Sword/novice_sword.png'),
+  novice_shield: require('../assets/Knight/Shield/novice_shield.png'),
+  novice_armor:  require('../assets/Knight/Armor/novice_armor.png'),
 };
 
 export default function InventoryScreen() {
