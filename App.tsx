@@ -14,6 +14,7 @@ import BattleScreen from './screens/BattleScreen';
 import StoreScreen from './screens/StoreScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import InventoryScreen from './screens/InventoryScreen';
+import MapEnemiesScreen from './screens/MapEnemiesScreen';
 
 export type RootStackParamList = {
   Welcome: undefined;
@@ -21,6 +22,7 @@ export type RootStackParamList = {
   CharacterName: { characterClass: 'Knight' | 'Barbarian' | 'Assassin' };
   Tabs: undefined;
   Inventory: undefined;
+  MapEnemies: { mapName: string; mapImage: any };
 };
 
 export type TabParamList = {
@@ -104,6 +106,7 @@ function AppNavigator() {
           <>
             <Stack.Screen name="Tabs" component={MainTabs} />
             <Stack.Screen name="Inventory" component={InventoryScreen} options={{ animation: 'slide_from_bottom' }} />
+            <Stack.Screen name="MapEnemies" component={MapEnemiesScreen} options={{ animation: 'slide_from_right' }} />
           </>
         ) : (
           <>

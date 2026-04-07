@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../App';
 
 const MAPS = [
   {
@@ -13,6 +16,8 @@ const MAPS = [
 ];
 
 export default function BattleScreen() {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scroll}>
@@ -31,7 +36,12 @@ export default function BattleScreen() {
         {/* Maps section */}
         <Text style={[styles.sectionLabel, { marginTop: 24 }]}>MAPS</Text>
         {MAPS.map(map => (
-          <TouchableOpacity key={map.key} style={styles.mapCard} activeOpacity={0.85}>
+          <TouchableOpacity
+            key={map.key}
+            style={styles.mapCard}
+            activeOpacity={0.85}
+            onPress={() => navigation.navigate('MapEnemies', { mapName: map.name, mapImage: map.image })}
+          >
             <Image source={map.image} style={styles.mapImage} resizeMode="cover" />
             <View style={styles.mapOverlay}>
               <View style={styles.mapMeta}>
